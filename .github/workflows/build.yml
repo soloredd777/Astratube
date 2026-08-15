@@ -19,7 +19,7 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.cmake ..
+          cmake -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake ..
           make -j$(nproc)
 
       - name: Guardar VPK
