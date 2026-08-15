@@ -1,0 +1,29 @@
+name: Build Astratube
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: vitasdk/vitasdk:latest
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Compilar Astratube
+        run: |
+          mkdir -p build
+          cd build
+          cmake ..
+          make -j$(nproc)
+
+      - name: Guardar VPK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Astratube-VPK
+          path: build/Astratube.vpk
